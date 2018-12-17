@@ -1,0 +1,39 @@
+body{
+    text-align: center;
+}
+.loginForm{
+    display: inline-block;
+    justify-content: center;
+    text-align: center;
+    font-size: large;
+}
+.warning{
+    color: red;
+}
+.loginTable{
+    justify-content: center;
+    display: inline-block;
+    text-align: right;
+}
+.fullPanel{
+    display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 2;
+}
+.editForm{
+	padding: 20px;
+    padding-bottom: 5px;
+    margin: auto;
+}
+.buttonLogin{
+    padding: 5px;
+}
+.wrongInput{
+    border-color: red;
+}

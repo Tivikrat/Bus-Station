@@ -1,0 +1,35 @@
+<?php
+session_start();
+include("header.php");
+include("../includes/DBConnect.php");
+$result = 1;
+if(isset($_POST) && isset($_POST['id']))
+{
+    $id = $_POST['id'];
+    $results = ["Видалено успішно!", "Помилка в базі даних.", "Квитка не існує"];
+    if(mysqli_num_rows(mysqli_query($connection, $query = "SELECT tickets.id FROM tickets WHERE tickets.id = '".$id."'")) == 0)
+    {
+        $result = -2;
+    }
+    else if(mysqli_query($connection, $query = "DELETE FROM tickets WHERE tickets.id = '".$id."';"))
+    {
+        $result = 0;
+    }
+    else
+    {
+        $result = -1;
+    }
+}
+?>
+<h3 class=<?php echo ($result > 0 ? '"hiddenMessage">' : ($result == 0 ? '"successMessage">'.$results[$result] : '"errorMessage">'.$results[-$result]));
+ if($result == -1) echo "\n".$query;?></h3>
+<h2 class="tabHeader">Повернення квитка</h2>
+<div class="fullPanel">
+    <div class="sendForm">
+        <form action="return.php" method="post">
+            Номер квитка:
+            <input type="number" name="id" id="idInput" require>
+            <input type="submit" value="Повернути">
+        </form>
+    </div>
+</div>

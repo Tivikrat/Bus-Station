@@ -1,0 +1,1 @@
+<meta http-equiv="refresh" content="0; url=/cashier/plan.php"/></head></html>

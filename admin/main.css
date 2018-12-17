@@ -1,0 +1,179 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
+body{
+	background-color: #f7f7f7;
+}
+ul{
+	list-style-type: none;
+}
+.footer{
+	position: fixed;
+	left: 0;
+	bottom: 5px;
+	width: 100%;
+	text-align: center;
+}
+.menu{
+	display: flex;
+	list-style-type: none;
+	flex-wrap: wrap;
+	padding: 0px;
+	width: 100%;
+	flex-basis: 100%;
+}
+.menuItem{
+	flex: auto;
+	align-items: center;
+	text-decoration: none;
+	padding: 8px;
+	background-color: #bfffbf;
+	border: 2px solid #9fff9f;
+	color: black;
+	text-align: center;
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	font-size: larger;
+}
+.menuItem:hover, .selectedMenuItem{
+	background-color: #9fff9f;
+}
+.menuElement{
+	flex: 1;
+	display: flex;
+}
+.windowName{
+	background-color: #efffef;
+	text-align: center;
+	padding: 25px;
+}
+.tabHeader
+{
+	text-align: center;
+	padding: 15px;
+}
+button{
+	padding: 5px;
+}
+input{
+	padding: 5px;
+	box-sizing: border-box;
+}
+input[type=checkbox]
+{
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(2); /* IE */
+  -moz-transform: scale(2); /* FF */
+  -webkit-transform: scale(2); /* Safari and Chrome */
+  -o-transform: scale(2); /* Opera */
+  transform: scale(2);
+  margin: auto;
+}
+.hiddenMessage{
+	padding: 10px;
+	text-align: center;
+	display: none;
+}
+.successMessage{
+	padding: 10px;
+	text-align: center;
+	background-color: #7fff7f;
+	border: 3px solid #00ff00;
+}
+.errorMessage{
+	padding: 10px;
+	text-align: center;
+	background-color: #ff7f7f;
+	border: 3px solid #ff0000;
+}
+.fullPanel{
+	display: none;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: #000000bf;
+	z-index: 2;
+}
+.editForm{
+	background-color: #bfbfbf;
+	padding: 20px;
+	padding-bottom: 5px;
+}
+.searchInput{
+	width: 100%;
+}
+#dataTable{
+	border-collapse: collapse;
+	margin:	auto;
+}
+#dataTable td, #dataTable th{
+	border: 2px solid #3f3f3f;
+	padding: 5px;
+}
+#dataTable th{
+	background-color: #e7e7e7;
+}
+.toolbar{
+	text-align: center;
+}
+.action{
+	padding: 10px;
+	margin: 10px;
+	font-size: larger;
+}
+.tooltip {
+	position: relative;
+	display: inline-block;
+	border-bottom: 1px dotted black;
+}
+  
+.tooltip .tooltiptext {
+	visibility: hidden;
+	width: 200px;
+	background-color: #3f3f3f;
+	color: #ffffff;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px 0;
+
+	/* Position the tooltip */
+	position: absolute;
+	z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+visibility: visible;
+}
+.tooltip .tooltiptext {
+	top: 20px;
+	margin: auto;
+}
+.buttonText{
+	vertical-align: middle;
+	display: inline;
+}
+.buttonImage{
+	height: 16px;
+	vertical-align: middle;
+	display: inline;
+}
+.bigbuttonImage{
+	height: 32px;
+	vertical-align: middle;
+	display: inline;
+}
+.boxTd{
+	text-align: center;
+}
+th input{
+	display: block;
+}
+.dataRow:hover{
+	background-color: #dfdfff;
+}
