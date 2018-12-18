@@ -118,7 +118,7 @@ if(isset($_POST))
  </div>
 <table id="dataTable">
     <tbody id="data">
-        <tr><th hidden='true'></th><th onclick="SortStrings(1)">Назва</th><th>Редагувати</th><th>Видалити</th></tr>
+        <tr><th hidden='true'></th><th onclick="SortStrings(1)">Назва</th><th>Редагувати</th><th>Закрити</th></tr>
         <tr>
             <th hidden='true'><input type="text" name="nameSearch" id="idSearch" oninput="PrivilegeSearch()" placeholder="Пошук"></th>
             <th><input type="text" class="searchInput" name="nameSearch" id="nameSearch" oninput="PrivilegeSearch()" placeholder="Пошук"></th>
@@ -129,7 +129,7 @@ if(isset($_POST))
         $stations = mysqli_query($connection, "SELECT * FROM stations");
         while($station = mysqli_fetch_assoc($stations))
         {
-            echo "<tr class='dataRow'><td hidden='true'>".$station["id"]."</td><td>".$station["name"]."</td><td><button class='actionButton' onclick='EditStation(this)'><img class='buttonImage' src='edit.png' alt='X '><div class='buttonText'>Редагувати</div></button></td><td><button class='actionButton' onclick='DeleteStation(this)'><img class='buttonImage' src='delete.png' alt='X '><div class='buttonText'>Видалити</div></button></td></tr>";
+            echo "<tr class='dataRow'><td hidden='true'>".$station["id"]."</td><td>".$station["name"]."</td><td><button class='actionButton' onclick='EditStation(this)'><img class='buttonImage' src='edit.png' alt='X '><div class='buttonText'>Редагувати</div></button></td><td><button class='actionButton' onclick='DeleteStation(this)'><img class='buttonImage' src='remove.png' alt='X '><div class='buttonText'>Закрити</div></button></td></tr>";
         }
         ?>
     </tbody>

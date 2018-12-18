@@ -189,7 +189,7 @@ if(isset($_POST))
         $cashiers = mysqli_query($connection, "SELECT cashiers.id, cashiers.name, cashiers.phone, cashiers.address, stations.name AS 'position', cashiers.money, cashiers.login, cashiers.password FROM cashiers, stations WHERE stations.id = cashiers.stationId ");
         while($cashier = mysqli_fetch_assoc($cashiers))
         {
-            echo "<tr class='dataRow'><td hidden='true'>".join("</td><td>", $cashier)."</td><td><button class='actionButton' onclick='EditPerson(this)'><img class='buttonImage' src='edit.png' alt='X '><div class='buttonText'>Редагувати</div></button></td><td><button class='actionButton' onclick='DeletePerson(this)'><img class='buttonImage' src='delete.png' alt='X '><div class='buttonText'>Звільнити</div></button></td></tr>";
+            echo "<tr class='dataRow'><td hidden='true'>".join("</td><td>", $cashier)."</td><td><button class='actionButton' onclick='EditPerson(this)'><img class='buttonImage' src='edit.png' alt='X '><div class='buttonText'>Редагувати</div></button></td><td><button class='actionButton' onclick='DeletePerson(this)'><img class='buttonImage' src='remove.png' alt='X '><div class='buttonText'>Звільнити</div></button></td></tr>";
         }
         ?>
     </tbody>

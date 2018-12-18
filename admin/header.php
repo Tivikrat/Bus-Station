@@ -45,6 +45,9 @@ if(!isset($_SESSION) || !isset($_SESSION["user"]) || $_SESSION["user"] != 'Admin
                 <a class="<?php echo ($_SESSION['tab']=='stationsStatistics' ? 'menuItem selectedMenuItem' : 'menuItem')?>" href="/admin/stationsStatistics.php">Використання станцій</a>
             </li>
             <li class="menuElement">
+                <a class="<?php echo ($_SESSION['tab']=='help' ? 'menuItem selectedMenuItem' : 'menuItem')?>" href="/UserHelper_last.chm">Допомога</a>
+            </li>
+            <li class="menuElement">
                 <a class="<?php echo ($_SESSION['tab']=='exit' ? 'menuItem selectedMenuItem' : 'menuItem')?>" href="/admin/exit.php">Вихід</a>
             </li>
         </ul>

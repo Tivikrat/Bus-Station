@@ -100,6 +100,22 @@ input[type=checkbox]
 	background-color: #000000bf;
 	z-index: 2;
 }
+.sendForm{
+	display: block;
+	background-color: #ffffff;
+	padding: 20px;
+	padding-bottom: 5px;
+}
+.fullVisiblePanel{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 2;
+}
 .editForm{
 	background-color: #bfbfbf;
 	padding: 20px;

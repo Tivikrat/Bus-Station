@@ -150,7 +150,7 @@ if(isset($_POST))
         $carriers = mysqli_query($connection, "SELECT * FROM carriers");
         while($carrier = mysqli_fetch_assoc($carriers))
         {
-            echo "<tr class='dataRow'><td hidden='true'>".$carrier["id"]."</td><td>".$carrier["name"]."</td><td>".$carrier["phone"]."</td><td>".$carrier["address"]."</td><td><button class='actionButton' onclick='EditPerson(this)'><img class='buttonImage' src='edit.png' alt='X '><div class='buttonText'>Редагувати</div></button></td><td><button class='actionButton' onclick='DeletePerson(this)'><img class='buttonImage' src='delete.png' alt='X '><div class='buttonText'>Відмовитися</div></button></td></tr>";
+            echo "<tr class='dataRow'><td hidden='true'>".$carrier["id"]."</td><td>".$carrier["name"]."</td><td>".$carrier["phone"]."</td><td>".$carrier["address"]."</td><td><button class='actionButton' onclick='EditPerson(this)'><img class='buttonImage' src='edit.png' alt='X '><div class='buttonText'>Редагувати</div></button></td><td><button class='actionButton' onclick='DeletePerson(this)'><img class='buttonImage' src='remove.png' alt='X '><div class='buttonText'>Відмовитися</div></button></td></tr>";
         }
         ?>
     </tbody>

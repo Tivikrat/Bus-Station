@@ -42,10 +42,20 @@ if(isset($_POST) && isset($_POST['p1']) && isset($_POST['p2']) && isset($_POST['
     for ($i=1; $i < $n; $i++) { 
         $query .= " AND r".$i.".id <> r".($i + 1).".id";
     }
+    if($query)
+    {
+        $paths = mysqli_query($connection, $query);
+    }
 }
 ?>
 <script src="path.js"></script>
 <h2 class="tabHeader">Пошук маршрутів із пересадками<?php echo $date; ?></h2>
+<?php
+if(mysqli_num_rows($paths) == 0)
+{ 
+    echo "<h3 class='errorMessage'>Маршрут від ".$p1." до ".$p2." з ".($n - 1)." пересадками не знайдено!</h3>";
+}
+?>
 <div class="fullPanel">
     <div class="sendForm">
         <form action="path.php" method="post">
@@ -57,7 +67,7 @@ if(isset($_POST) && isset($_POST['p1']) && isset($_POST['p2']) && isset($_POST['
                     <ul class="optionsList" id="p2List"></ul></td></tr>
                 <tr><td>Кількість пересадок:</td><td><input type="number" name="n" id="nInput" value="<?php echo $_POST['n']; ?>" min="1" max="5" required></td></tr>
             </table>
-            <button type="button" id="addButton">Показати маршрути</button>
+            <button type="submit" id="addButton">Показати маршрути</button>
         </form>
     </div>
 </div>
@@ -66,17 +76,19 @@ if(isset($_POST) && isset($_POST['p1']) && isset($_POST['p2']) && isset($_POST['
         <?php
         if($query)
         {
-            echo "<tr><th>Вартість</th><th>Пункт</th>";
-            for ($i=0; $i < $n; $i++) { 
-                echo "<th>Маршрут</th><th>Пункт</th>";
-            }
-            echo "</tr>";
-            $paths = mysqli_query($connection, $query);
-            while($path = mysqli_fetch_assoc($paths))
+            if(mysqli_num_rows($paths) > 0)
             {
-                echo "<tr><td>".join("</td><td>", $path)."</td></tr>";
+                echo "<tr><th>Вартість</th><th>Пункт</th>";
+                for ($i=0; $i < $n; $i++) { 
+                    echo "<th>Маршрут</th><th>Пункт</th>";
+                }
+                echo "</tr>";
+                while($path = mysqli_fetch_assoc($paths))
+                {
+                    echo "<tr><td>".join("</td><td>", $path)."</td></tr>";
+                }
             }
-        }echo $n;
+        }
         ?>
     </tbody>
 </table>
