@@ -167,7 +167,7 @@ if(isset($_POST))
  if($result == -1) echo "\n".$query;?>
  </h3>
  <div class="toolbar">
-    <button class="action" onclick="addPanel.style.display='flex'"><img class='bigbuttonImage' src='add.png' alt='X '><div class='buttonText'>Додати пункт</div></button>
+    <button class="action" onclick="addPanel.style.display='flex'; addRouteName.focus()"><img class='bigbuttonImage' src='add.png' alt='X '><div class='buttonText'>Додати пункт</div></button>
  </div>
 <table id="dataTable">
     <tbody id="data">

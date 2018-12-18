@@ -1,19 +1,21 @@
 <?php
 session_start();
+$_SESSION["tab"]='path';
 include("header.php");
 include("../includes/DBConnect.php");
 if(isset($_POST) && isset($_POST['p1']) && isset($_POST['p2']) && isset($_POST['n']))
 {
     $p1 = $_POST['p1'];
     $p2 = $_POST['p2'];
-    $n = $_POST['n'];
+    $n = $_POST['n'] + 1;
+    $n = ($n > 5 ? 5 : ($n < 1 ? 1 : $n));
     $query = "SELECT (d2.price - d1.price";
     for ($i=2; $i < $n + 1; $i++) { 
         $query .= "+ d".($i * 2).".price - d".($i * 2 - 1).".price";
     }
     $query .= ")";
     for ($i=1; $i < $n + 1; $i++) { 
-        $query .= ", s".$i.".name AS 's".$i."', r".$i.".name AS 'r".$i."'";
+        $query .= ", s".$i.".name AS 's".$i."', CONCAT('<p>', r".$i.".name, '</p><p>→ → →<\p>') AS 'r".$i."'";
     }
     $query .= ", s".($n + 1).".name AS 's.".($n + 1)."'FROM stations s".($n + 1);
     for ($i=1; $i < $n + 1; $i++) { 
@@ -42,23 +44,24 @@ if(isset($_POST) && isset($_POST['p1']) && isset($_POST['p2']) && isset($_POST['
     }
 }
 ?>
-<h2 class="tabHeader">Маршрути на <?php echo $date; ?></h2>
+<script src="path.js"></script>
+<h2 class="tabHeader">Пошук маршрутів із пересадками<?php echo $date; ?></h2>
 <div class="fullPanel">
     <div class="sendForm">
         <form action="path.php" method="post">
             Виберіть маршрут і кількість пересадок:
             <table>
-                <tr><td>Пункт відправлення:</td><td><input type="text" name="p1" id="p1Input" oninput="searchNameChanged(this, p1List, VerifyAddPoint, 'destinationSearch')" required>
+                <tr><td>Пункт відправлення:</td><td><input type="text" name="p1" id="p1Input" value="<?php echo ($_POST['p1'] ? $_POST['p1'] : mysqli_fetch_assoc(mysqli_query($connection, "SELECT stations.name FROM stations WHERE stations.id = '".$_SESSION['stationId']."';"))['name']); ?>" oninput="searchNameChanged(this, p1List, VerifyAddPoint, 'destinationSearch')" required>
                     <ul class="optionsList" id="p1List"></ul></td></tr>
-                <tr><td>Пункт прибуття:</td><td><input type="text" name="p2" id="p2Input" oninput="searchNameChanged(this, p2List, VerifyAddPoint, 'destinationSearch')" required>
+                <tr><td>Пункт прибуття:</td><td><input type="text" name="p2" id="p2Input" value="<?php echo $_POST['p2']; ?>" oninput="searchNameChanged(this, p2List, VerifyAddPoint, 'destinationSearch')" required>
                     <ul class="optionsList" id="p2List"></ul></td></tr>
-                <tr><td>Кількість пересадок:</td><td><input type="number" name="n" id="nInput" min="2" required></td></tr>
+                <tr><td>Кількість пересадок:</td><td><input type="number" name="n" id="nInput" value="<?php echo $_POST['n']; ?>" min="1" max="5" required></td></tr>
             </table>
-            <button type="button" id="addButton">Показати маршрути"</button>
+            <button type="button" id="addButton">Показати маршрути</button>
         </form>
     </div>
 </div>
-<table id="dataTable">
+<table id="dataTable" class="routesTable">
     <tbody id="data">
         <?php
         if($query)
@@ -73,7 +76,7 @@ if(isset($_POST) && isset($_POST['p1']) && isset($_POST['p2']) && isset($_POST['
             {
                 echo "<tr><td>".join("</td><td>", $path)."</td></tr>";
             }
-        }
+        }echo $n;
         ?>
     </tbody>
 </table>

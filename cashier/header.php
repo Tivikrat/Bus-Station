@@ -27,7 +27,7 @@ if(!isset($_SESSION) || !isset($_SESSION["user"]) || $_SESSION["user"] != 'cashi
                 <a class="<?php echo ($_SESSION['tab']=='return' ? 'menuItem selectedMenuItem' : 'menuItem')?>" href="/cashier/return.php">Повернення білетів</a>
             </li>
             <li class="menuElement">
-                <a class="<?php echo ($_SESSION['tab']=='path' ? 'menuItem selectedMenuItem' : 'menuItem')?>" href="/cashier/path.php">Транспортна накладна</a>
+                <a class="<?php echo ($_SESSION['tab']=='path' ? 'menuItem selectedMenuItem' : 'menuItem')?>" href="/cashier/path.php">Маршрут з пересадками</a>
             </li>
             <li class="menuElement">
                 <a class="<?php echo ($_SESSION['tab']=='exit' ? 'menuItem selectedMenuItem' : 'menuItem')?>" href="/cashier/exit.php">Вихід</a>

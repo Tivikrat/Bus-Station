@@ -110,7 +110,7 @@ if(isset($_POST))
         <form action="routes.php" method="post" id="formEdit">
             <h4>Додання маршруту</h4>
             <table>
-                <tr><td>Назва рейсу:</td><td><input type="text" name="routeName" class="emptyInput" oninput="searchNameChanged(this, addRoutes, VerifyAddRoute, 'routeSearch')" required>
+                <tr><td>Назва рейсу:</td><td><input type="text" name="routeName" class="emptyInput" id="addName" oninput="searchNameChanged(this, addRoutes, VerifyAddRoute, 'routeSearch')" required>
                     <ul class="optionsList" id="addRoutes"></td></tr>
                 <tr><td>Назва перевізника:</td><td><input type="text" class="emptyInput" id="addCarrierName" name="carrierName" oninput="searchNameChanged(this, addCarriers, VerifyAddRoute, 'carrierSearch')" required>
                     <ul class="optionsList" id="addCarriers"></ul></td></tr>
@@ -197,7 +197,7 @@ if(isset($_POST))
  if($result == -1) echo "\n".$query;?>
  </h3>
  <div class="toolbar">
-    <button class="action" onclick="addPanel.style.display='flex'"><img class='bigbuttonImage' src='add.png' alt='X '><div class='buttonText'>Додати маршрут</div></button>
+    <button class="action" onclick="addPanel.style.display='flex'; addName.focus();"><img class='bigbuttonImage' src='add.png' alt='X '><div class='buttonText'>Додати маршрут</div></button>
  </div>
 <table id="dataTable">
     <tbody id="data">

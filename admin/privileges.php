@@ -89,7 +89,7 @@ if(isset($_POST))
         <form action="privileges.php" method="post" id="formEdit">
             <h4>Встановлення пільги</h4>
             <table>
-                <tr><td>Назва пільги:</td><td><input type="text" name="name" required></td></tr>
+                <tr><td>Назва пільги:</td><td><input type="text" name="name" id="addName" required></td></tr>
                 <tr><td>Величина пільги:</td><td><input type="number" name="discount" step="any" min="0" max="100" required></td></tr>
             </table>
             <input type="submit" value="Встановити"><button type="button" class="actionButton" onclick="addPanel.style.display='none'">Скасувати</button>
@@ -127,7 +127,7 @@ if(isset($_POST))
  if($result == -1) echo "\n".$query;?>
  </h3>
  <div class="toolbar">
-    <button class="action" onclick="addPanel.style.display='flex'"><img class='bigbuttonImage' src='add.png' alt='X '><div class='buttonText'>Додати пільгу</div></button>
+    <button class="action" onclick="addPanel.style.display='flex'; addName.focus()"><img class='bigbuttonImage' src='add.png' alt='X '><div class='buttonText'>Додати пільгу</div></button>
  </div>
 <table id="dataTable">
     <tbody id="data">

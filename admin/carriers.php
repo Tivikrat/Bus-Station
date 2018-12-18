@@ -91,7 +91,7 @@ if(isset($_POST))
         <form action="carriers.php" method="post" id="formEdit">
             <h4>Реєстрація перевізника</h4>
             <table>
-                <tr><td>Назва:</td><td><input type="text" name="name" required></td></tr>
+                <tr><td>Назва:</td><td><input type="text" name="name" id="addName" required></td></tr>
                 <tr><td>Телефон:</td><td><input type="text" name="phone" required></td></tr>
                 <tr><td>Адреса:</td><td><input type="text" name="address" required></td></tr>
             </table>
@@ -133,7 +133,7 @@ if(isset($_POST))
  if($result == -1) echo "\n".$query;?>
  </h3>
  <div class="toolbar">
-    <button class="action" onclick="addPanel.style.display='flex'"><img class='bigbuttonImage' src='add.png' alt='X '><div class='buttonText'>Додати перевізника</div></button>
+    <button class="action" onclick="addPanel.style.display='flex'; addName.focus()"><img class='bigbuttonImage' src='add.png' alt='X '><div class='buttonText'>Додати перевізника</div></button>
  </div>
 <table id="dataTable">
     <tbody id="data">

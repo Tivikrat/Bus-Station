@@ -15,6 +15,7 @@ function EditPerson(button)
     inputPhone.value = button.parentElement.parentElement.childNodes[2].textContent;
     inputAddress.value = button.parentElement.parentElement.childNodes[3].textContent;
     editPanel.style.display='flex';
+    inputName.focus();
 }
 function DeletePerson(button)
 {
@@ -78,6 +79,7 @@ function EditPoint(button)
     inputPrice.value = button.parentElement.parentElement.childNodes[3].textContent;
     inputTime.value = button.parentElement.parentElement.childNodes[4].textContent;
     editPanel.style.display='flex';
+    inputPrice.focus();
 }
 function DeletePoint(button)
 {
@@ -144,6 +146,7 @@ function EditPrivilege(button)
     inputName.value = button.parentElement.parentElement.childNodes[1].textContent;
     inputDiscount.value = button.parentElement.parentElement.childNodes[2].textContent;
     editPanel.style.display='flex';
+    inputName.focus();
 }
 function DeletePrivilege(button)
 {
@@ -157,6 +160,7 @@ function EditStation(button)
     inputId.value = button.parentElement.parentElement.childNodes[0].textContent;
     inputName.value = button.parentElement.parentElement.childNodes[1].textContent;
     editPanel.style.display='flex';
+    inputName.focus();
 }
 function DeleteStation(button)
 {
@@ -271,6 +275,28 @@ function VerifyAddPoint()
         addButton.type='button';
     }
 }
+function VerifyAddPosition()
+{
+    if(addStationName.className == 'correctInput')
+    {
+        addButton.type='submit';
+    }
+    else
+    {
+        addButton.type='button';
+    }
+}
+function VerifyEditPosition()
+{
+    if(editStationName.className == 'correctInput')
+    {
+        editButton.type='submit';
+    }
+    else
+    {
+        editButton.type='button';
+    }
+}
 function EditRoute(button)
 {
     values = button.parentElement.parentElement.childNodes;
@@ -287,6 +313,7 @@ function EditRoute(button)
     editD6.checked = values[10].firstChild.checked;
     editD7.checked = values[11].firstChild.checked;
     editPanel.style.display='flex';
+    editRouteName.focus();
 }
 function DeleteRoute(button)
 {

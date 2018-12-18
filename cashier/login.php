@@ -20,7 +20,7 @@ if(isset($_POST) && isset($_POST["login"]) && isset($_POST["password"]))
     {
         $result = -3;
     }
-    else if(!($id = mysqli_query($connection, $query = "SELECT cashiers.id AS 'id', cashiers.name AS 'name' FROM cashiers WHERE cashiers.login='".$login."' AND cashiers.password='".$password."'")))
+    else if(!($id = mysqli_query($connection, $query = "SELECT cashiers.id AS 'id', cashiers.name AS 'name', cashiers.stationId AS 'stationId' FROM cashiers WHERE cashiers.login='".$login."' AND cashiers.password='".$password."'")))
     {
         $result = -1;
     }
@@ -30,6 +30,7 @@ if(isset($_POST) && isset($_POST["login"]) && isset($_POST["password"]))
         $_SESSION['user'] = 'cashier';
         $_SESSION["id"] = $id['id'];
         $_SESSION["name"] = $id['name'];
+        $_SESSION["stationId"] = $id['stationId'];
         echo '<meta http-equiv="refresh" content="0; url=/cashier/plan.php"/></head></html>';
         exit;
     }

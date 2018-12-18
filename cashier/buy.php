@@ -1,14 +1,16 @@
 <?php
 session_start();
 include("../includes/DBConnect.php");
+$_SESSION["tab"]='buy';
 ?>
+<script src="buy.js"></script>
 <?php
 if(isset($_POST))
 {
     $result = 1;
     if(isset($_POST['departureDate']) && isset($_POST['routeName'])
         && isset($_POST['departureName']) && isset($_POST['arrivalName'])
-        && isset($_POST['privilegeName']) && isset($_POST['buyDate']))
+        && isset($_POST['privilegeName']))
     {
         $routeName = $_POST['routeName'];
         $departureDate = $_POST['departureDate'];
@@ -16,7 +18,6 @@ if(isset($_POST))
         $arrivalPoint = $_POST['arrivalName'];
         $baggage = ($_POST['baggage'] ? 1 : 0);
         $privilege = $_POST['privilegeName'];
-        $buyDateTime = $_POST['buyDate'];
         $results = [
             "Здійснено успішно!",
             "Помилка в базі даних!",
@@ -189,19 +190,21 @@ include("header.php");
     <h2>Покупка білетів</h2>
     <form action="buy.php" method="post">
     <table>
+        <tr><td>Дата відправлення:</td><td><input type="date" name="departureDate" id="inputDate" value="<?php echo date("Y-m-d"); ?>" required></td></tr>
         <tr><td>Пункт відправлення:</td>
-            <td><input type="text" name="departureName" id="addDeparture" oninput="searchNameChanged(this, addDepartures, VerifyAddTicket, 'destinationSearch')" required>
+            <td><input type="text" name="departureName" id="addDeparture" oninput="searchNameChanged(this, addDepartures, VerifyAddTicket, 'destinationSearch')"
+            value="<?php $query = "SELECT stations.name FROM stations WHERE stations.id = '".$_SESSION['stationId']."';";
+            echo mysqli_fetch_assoc(mysqli_query($connection, $query))['name'];
+             ?>" required>
                 <ul class="optionsList" id="addDepartures" required></ul></td></tr>
         <tr><td>Пункт прибуття:</td>
             <td><input type="text" name="arrivalName" id="addArrival" oninput="searchNameChanged(this, addArrivals, VerifyAddTicket, 'destinationSearch')" required>
                 <ul class="optionsList" id="addArrivals" required></ul></td></tr>
-        <tr><td>Дата відправлення:</td><td><input type="date" name="departureDate" required></td></tr>
         <tr><td>Назва рейсу:</td><td><input type="text" class="emptyInput" name="routeName" id="addRouteName" oninput="searchNameChanged(this, addRoutes, VerifyAddTicket, 'routeSearch')" class="emptyInput" required>
             <ul class="optionsList" id="addRoutes"></ul></td></tr>
         <tr><td>Назва пільги:</td><td><input type="text" class="emptyInput" id="addPrivilegeName" name="privilegeName" oninput="searchNameChanged(this, addPrivileges, VerifyAddTicket, 'privilegeSearch')" required>
             <ul class="optionsList" id="addPrivileges"></ul></td></tr>
         <tr><td>Багаж:</td><td><input type="checkbox" name="baggage"></td></tr>
-        <tr><td>Дата покупки:</td><td><input type="date" name="buyDate"></td></tr>
     </table>
     <button type="button" id="addButton">Купити</button><button type="button" class="actionButton" onclick="addPanel.style.display='none'">Скасувати</button>
     </form>

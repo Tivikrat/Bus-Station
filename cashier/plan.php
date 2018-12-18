@@ -1,5 +1,6 @@
 <?php
 session_start();
+$_SESSION["tab"]='plan';
 include("header.php");
 include("../includes/DBConnect.php");
 if(isset($_GET) && isset($_GET['date']))
@@ -11,12 +12,13 @@ else
     $date = date("Y-m-d");
 }
 ?>
+<script src="plan.js"></script>
 <h2 class="tabHeader">Маршрути на <?php echo $date; ?></h2>
 <div class="fullPanel">
     <div class="sendForm">
         <form action="plan.php" method="get">
             Вибрати день:
-            <input type="date" name="date" id="dateInput" value="<?php echo $date;?>" require>
+            <input type="date" name="date" id="inputDate" value="<?php echo $date;?>" require>
             <input type="submit" value="Показати маршрути">
         </form>
     </div>

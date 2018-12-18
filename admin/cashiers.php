@@ -9,11 +9,12 @@ if(isset($_POST))
     if(isset($_POST["id"]))
     {
         $id = $_POST["id"];
-        if(isset($_POST["name"]) && isset($_POST["phone"]) && isset($_POST["address"]) && isset($_POST["login"]) && isset($_POST["password"]))
+        if(isset($_POST["name"]) && isset($_POST["phone"]) && isset($_POST["address"]) && isset($_POST["position"]) && isset($_POST["login"]) && isset($_POST["password"]))
         {
             $name = $_POST["name"];
             $phone = $_POST["phone"];
             $address = $_POST["address"];
+            $position = $_POST["position"];
             $login = $_POST["login"];
             $password = $_POST["password"];
             $results = [
@@ -21,7 +22,8 @@ if(isset($_POST))
                 "Помилка в базі даних.",
                 "ПІБ касира не задано!",
                 "Телефон не задано!",
-                "Адреса не задана!"];
+                "Адреса не задана!",
+                "Розташування касира не вказано!"];
             if(!strlen($name))
             {
                 $result = -2;
@@ -33,6 +35,14 @@ if(isset($_POST))
             else if(!strlen($address))
             {
                 $result = -4;
+            }
+            else if(!($stationIds = mysqli_query($connection, $query = "SELECT stations.id FROM stations WHERE LOWER(stations.name)=LOWER('".$stationName."');")))
+            {
+                $result = -1;
+            }
+            else if(!($stationId = mysqli_fetch_assoc($stationIds)))
+            {
+                $result = -5;
             }
             else
             {
@@ -105,9 +115,11 @@ if(isset($_POST))
         <form action="cashiers.php" method="post" id="formEdit">
             <h4>Реєстрація касира</h4>
             <table>
-                <tr><td>ПІБ:</td><td><input type="text" name="name" required></td></tr>
+                <tr><td>ПІБ:</td><td><input type="text" name="name" id="addName" required></td></tr>
                 <tr><td>Телефон:</td><td><input type="text" name="phone" required></td></tr>
                 <tr><td>Адреса:</td><td><input type="text" name="address" required></td></tr>
+                <tr><td>Назва станції розташування:</td><td><input type="text" class="emptyInput" name="stationName" id="addStationName" required oninput="searchNameChanged(this, addStations, VerifyAddPosition, 'stationSearch')">
+                    <ul class="optionsList" id="addStations"></td></tr>
                 <tr><td>Логін:</td><td><input type="text" name="login"></td></tr>
                 <tr><td>Пароль:</td><td><input type="text" name="password"></td></tr>
             </table>
@@ -124,6 +136,8 @@ if(isset($_POST))
                 <tr><td>ПІб:</td><td><input type="text" name="name" id="inputName" required></td></tr>
                 <tr><td>Телефон:</td><td><input type="text" name="phone" id="inputPhone" required></td></tr>
                 <tr><td>Адреса:</td><td><input type="text" name="address" id="inputAddress" required></td></tr>
+                <tr><td>Назва станції розташування:</td><td><input type="text" name="stationName" id="inputStationName" required oninput="searchNameChanged(this, editStations, VerifyEditPosition, 'stationSearch')">
+                    <ul class="optionsList" id="editStations"></td></tr>
                 <tr><td>Логін:</td><td><input type="text" name="login" id="inputLogin"></td></tr>
                 <tr><td>Пароль:</td><td><input type="text" name="password" id="inputPassword"></td></tr>
             </table>
@@ -140,8 +154,9 @@ if(isset($_POST))
                 <tr><td>ПІБ:</td><td id="deleteName"></td></tr>
                 <tr><td>Телефон:</td><td id="deletePhone"></td></tr>
                 <tr><td>Адреса:</td><td id="deleteAddress"></td></tr>
+                <!-- <tr><td>Назва станції:</td><td id="deleteStationName"></td></tr>
                 <tr><td>Логін:</td><td id="deleteLogin"></td></tr>
-                <tr><td>Пароль:</td><td id="deletePassword"></td></tr>
+                <tr><td>Пароль:</td><td id="deletePassword"></td></tr> -->
             </table>
             <input type="submit" value="Звільнити"><button type="button" class="actionButton" onclick="deletePanel.style.display='none'">Скасувати</button>
         </form>
@@ -152,11 +167,11 @@ if(isset($_POST))
  if($result == -1) echo "\n".$query;?>
  </h3>
  <div class="toolbar">
-    <button class="action" onclick="addPanel.style.display='flex'"><img class='bigbuttonImage' src='add.png' alt='X '><div class='buttonText'>Додати касира</div></button>
+    <button class="action" onclick="addPanel.style.display='flex'; addName.focus();"><img class='bigbuttonImage' src='add.png' alt='X '><div class='buttonText'>Додати касира</div></button>
  </div>
 <table id="dataTable">
     <tbody id="data">
-        <tr><th hidden='true'></th><th onclick="SortStrings(1)">Назва</th><th onclick="SortStrings(2)">Телефон</th><th onclick="SortStrings(3)">Адреса</th><th onclick="SortStrings(4)">Місце касира</th><th onclick="SortStrings(5)">Кошти</th><th onclick="SortStrings(6)">Логін</th><th onclick="SortStrings(7)">Пароль</th><th>Редагувати</th><th>Звільнити</th></tr>
+        <tr><th hidden='true'></th><th onclick="SortStrings(1)">Назва</th><th onclick="SortStrings(2)">Телефон</th><th onclick="SortStrings(3)">Адреса</th><th onclick="SortStrings(4)">Розташування</th><th onclick="SortStrings(5)">Кошти</th><th onclick="SortStrings(6)">Логін</th><th onclick="SortStrings(7)">Пароль</th><th>Редагувати</th><th>Звільнити</th></tr>
         <tr>
             <th hidden='true'><input type="text" name="nameSearch" id="idSearch" oninput="CashiersSearch()" placeholder="Пошук"></th>
             <th><input type="text" class="searchInput" name="nameSearch" id="nameSearch" oninput="CashiersSearch()" placeholder="Пошук"></th>

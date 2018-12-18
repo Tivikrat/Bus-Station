@@ -79,7 +79,7 @@ if(isset($_POST))
         <form action="stations.php" method="post" id="formEdit">
             <h4>Додання станції</h4>
             <table>
-                <tr><td>Назва станції:</td><td><input type="text" name="name" required></td></tr>
+                <tr><td>Назва станції:</td><td><input type="text" name="name" id="addName" required></td></tr>
             </table>
             <input type="submit" value="Додати"><button type="button" class="actionButton" onclick="addPanel.style.display='none'">Скасувати</button>
         </form>
@@ -114,7 +114,7 @@ if(isset($_POST))
  if($result == -1) echo "\n".$query;?>
  </h3>
  <div class="toolbar">
-    <button class="action" onclick="addPanel.style.display='flex'"><img class='bigbuttonImage' src='add.png' alt='X '><div class='buttonText'>Додати станцію</div></button>
+    <button class="action" onclick="addPanel.style.display='flex'; addName.focus()"><img class='bigbuttonImage' src='add.png' alt='X '><div class='buttonText'>Додати станцію</div></button>
  </div>
 <table id="dataTable">
     <tbody id="data">
